@@ -26,11 +26,12 @@ spec:
         - name: DB_USER 
           valueFrom: 
             secretKeyRef:
-              name: web-todo
+              name: db-todo
               key: username       
 
         - name: DB_PASSWORD 
           valueFrom: 
             secretKeyRef:
-              name: web-todo
+              name: db-todo
+
               key: password
