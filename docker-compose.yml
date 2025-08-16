@@ -1,0 +1,27 @@
+version: '3.9'
+
+services:
+  webserver:
+    container_name: webapp
+    image: todo3
+    ports:
+      - "5000:80"
+    environment:
+      - DB_HOST=database
+      - DB_USER=database
+      - DB_PASSWORD=todo@123!
+      - DB_NAME=postgres
+      - DB_PORT=5432
+  database:
+    container_name: database
+    image: "postgres:13.22-trixie"
+    environment:
+      - POSTGRES_USER=database
+      - POSTGRES_PASSWORD=todo@123#
+      - POSTGRES_DB=postgres
+    ports:
+      - "5433:5432"
+    volumes:
+      - myvol:/var/lib/postgresql/data
+volumes:
+  myvol:
