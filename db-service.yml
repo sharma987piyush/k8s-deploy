@@ -1,0 +1,13 @@
+kind: Service
+apiVersion: v1
+metadata:
+  name: db-service
+spec:
+  ports:
+    - name: postgres-db
+      port: 5432
+      targetPort: 5432
+  selector:
+    app: db-todo
+
+  type: ClusterIP

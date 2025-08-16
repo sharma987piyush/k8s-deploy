@@ -1,0 +1,36 @@
+apiVersion: apps/v1
+kind: Deployment
+metadata:
+  name: todo-list
+spec:
+  replicas: 3
+  selector:
+    matchLabels:
+      app: web-todo
+  template:
+    metadata:
+      labels:
+        app: web-todo
+    spec:
+      containers:
+      - name: todo
+        image: todo3
+        env: 
+        - name: DB_HOST
+          value: "db-service" 
+        - name: DB_NAME
+          value: "postgres"
+        - name: DB_PORT
+          value: "5432"
+          
+        - name: DB_USER 
+          valueFrom: 
+            secretKeyRef:
+              name: web-todo
+              key: username       
+
+        - name: DB_PASSWORD 
+          valueFrom: 
+            secretKeyRef:
+              name: web-todo
+              key: password
